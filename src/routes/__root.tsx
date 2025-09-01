@@ -1,3 +1,4 @@
+import { ThemeProvider } from "@/components/theme-provider.tsx";
 import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
 import { TanstackDevtools } from '@tanstack/react-devtools'
@@ -36,18 +37,20 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <HeadContent />
       </head>
       <body>
-        {children}
-        <TanstackDevtools
-          config={{
-            position: 'bottom-left',
-          }}
-          plugins={[
-            {
-              name: 'Tanstack Router',
-              render: <TanStackRouterDevtoolsPanel />,
-            },
-          ]}
-        />
+	      <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+	        {children}
+	        <TanstackDevtools
+	          config={{
+	            position: 'bottom-left',
+	          }}
+	          plugins={[
+	            {
+	              name: 'Tanstack Router',
+	              render: <TanStackRouterDevtoolsPanel />,
+	            },
+	          ]}
+	        />
+	      </ThemeProvider>
         <Scripts />
       </body>
     </html>
